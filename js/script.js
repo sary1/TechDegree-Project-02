@@ -54,9 +54,10 @@ paginationLinks(54);
 // Add functionality to the pagination buttons so that they show and hide the correct items
 // Tip: If you created a function above to show/hide list items, it could be helpful here
 filterDiv.addEventListener('click', (e) => {
-    e.preventDefault()
+    // e.preventDefault();
     const targetedLink = e.target;
     const listItems    = filterDiv.children;
+    const index        = parseInt(targetedLink.textContent) + 1;
 
     // remove "active" class from all list anchor tags
     for(let i = 0; i < listItems.length; i++){
@@ -64,6 +65,7 @@ filterDiv.addEventListener('click', (e) => {
     }
 
     targetedLink.classList.add('active');
+    showLimit(students, index);
 })
 
 
