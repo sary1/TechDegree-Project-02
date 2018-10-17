@@ -37,7 +37,7 @@ function paginationLinks(studentsNum){
         const link = document.createElement('li');
         const aTag = document.createElement('a');
         aTag.href = '#';
-        aTag.textContent = i;
+        aTag.textContent = i + 1;
         if(i === 0){
             aTag.classList.add('active');
         }
@@ -48,7 +48,7 @@ function paginationLinks(studentsNum){
     filterDiv.classList.add('pagination');
     mainDiv.appendChild(filterDiv);
 }
-paginationLinks(54);
+paginationLinks(studentsNum);
 
 
 // Add functionality to the pagination buttons so that they show and hide the correct items
@@ -57,7 +57,7 @@ filterDiv.addEventListener('click', (e) => {
     // e.preventDefault();
     const targetedLink = e.target;
     const listItems    = filterDiv.children;
-    const index        = parseInt(targetedLink.textContent) + 1;
+    const index        = parseInt(targetedLink.textContent);
 
     // remove "active" class from all list anchor tags
     for(let i = 0; i < listItems.length; i++){
