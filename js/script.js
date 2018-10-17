@@ -1,9 +1,4 @@
-/******************************************
-Treehouse Techdegree:
-FSJS project 2 - List Filter and Pagination
-******************************************/
-
-// Add variables that store DOM elements you will need to reference and/or manipulate
+// Global Variables
 const studentsList = document.querySelector(".student-list");
 const students     = studentsList.children;
 const studentsNum  = studentsList.children.length;
@@ -11,12 +6,14 @@ const mainDiv      = document.querySelector('.page');
 const filterDiv    = document.createElement('div');
 
 
-// Create a function to hide all of the items in the list excpet for the ten you want to show
-// Tip: Keep in mind that with a list of 54 students, the last page will only display four
+// a function that takes a list and a page index as inputs and filters list items to show only the students in that page
 function showLimit(list, idx){
+
+    // creating a range of students' names to show on a single page
     const firstStudentIndex = (idx - 1) * 10;
     const lastStudentIndex  = firstStudentIndex + 9;
 
+    // Loop over the whole students list and show only the ones on the given index
     for (let i = 0; i < studentsNum; i++){
         if (i >= firstStudentIndex && i <= lastStudentIndex){
             students[i].style.display = 'block';
@@ -25,14 +22,14 @@ function showLimit(list, idx){
         }
     }
 }
-showLimit(students, 1);
 
 
 
-// Create and append the pagination links - Creating a function that can do this is a good approach
+// a function that creates pagination links based on the number of students that is given as an input
 function paginationLinks(studentsNum){
     const linksNum  = Math.ceil(studentsNum / 10);
 
+    // a loop that creates each pagination link and adds it to the DOM with the first link active
     for(let i = 0; i < linksNum; i++){
         const link = document.createElement('li');
         const aTag = document.createElement('a');
@@ -51,8 +48,7 @@ function paginationLinks(studentsNum){
 paginationLinks(studentsNum);
 
 
-// Add functionality to the pagination buttons so that they show and hide the correct items
-// Tip: If you created a function above to show/hide list items, it could be helpful here
+// Listenenig to click events on the pagination links
 filterDiv.addEventListener('click', (e) => {
     // e.preventDefault();
     const targetedLink = e.target;
@@ -69,5 +65,5 @@ filterDiv.addEventListener('click', (e) => {
 })
 
 
-
-
+// Initializing the page with the first 10 students and the first pagination link in the active mode
+showLimit(students, 1);
