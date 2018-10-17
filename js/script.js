@@ -7,6 +7,8 @@ FSJS project 2 - List Filter and Pagination
 const studentsList = document.querySelector(".student-list");
 const students     = studentsList.children;
 const studentsNum  = studentsList.children.length;
+const mainDiv      = document.querySelector('.page');
+const filterDiv    = document.createElement('div');
 
 
 // Create a function to hide all of the items in the list excpet for the ten you want to show
@@ -23,18 +25,34 @@ function showLimit(list, idx){
         }
     }
 }
-// showLimit(students, 2);
+showLimit(students, 1);
 
 
 
 // Create and append the pagination links - Creating a function that can do this is a good approach
+function paginationLinks(studentsNum){
+    const linksNum  = Math.ceil(studentsNum / 10);
 
+    for(let i = 0; i < linksNum; i++){
+        const link = document.createElement('li');
+        const aTag = document.createElement('a');
+        aTag.href = '#';
+        aTag.textContent = i;
+        if(i === 0){
+            aTag.classList.add('active');
+        }
+        link.appendChild(aTag);
+        filterDiv.appendChild(link);
+    }
 
+    filterDiv.classList.add('pagination');
+    mainDiv.appendChild(filterDiv);
+}
+paginationLinks(54);
 
 
 // Add functionality to the pagination buttons so that they show and hide the correct items
 // Tip: If you created a function above to show/hide list items, it could be helpful here
-
 
 
 
