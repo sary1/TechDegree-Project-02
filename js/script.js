@@ -67,3 +67,46 @@ filterDiv.addEventListener('click', (e) => {
 
 // Initializing the page with the first 10 students and the first pagination link in the active mode
 showLimit(students, 1);
+
+
+/*-----------------------------------------
+-------------------------------------------
+Search Bar addition and pagination response
+-------------------------------------------
+-----------------------------------------*/
+
+
+// Creating search bar
+const pageHeader  = document.querySelector('.page-header');
+
+function createElement(elementName, property, value){
+    const element = document.createElement(elementName);
+    element[property] = value;
+    return element;
+}
+
+function append(parent, children){
+    for(let i = 0; i < children.length; i++){
+        parent.appendChild(children[i]);
+    }
+}
+
+const searchBar   =
+    createElement('div', 'classList', 'student-search');
+const searchInput =
+    createElement('input','placeholder', 'Search for students...');
+const searchBtn   =
+    createElement('button', 'textContent', 'Search');
+
+append(searchBar, [searchInput, searchBtn]);
+append(pageHeader, [searchBar]);
+
+
+
+
+
+
+
+
+
+
