@@ -176,11 +176,11 @@ function createPagination(studentsNum){
     mainDiv.appendChild(filterDiv);
 }
 
-
+let searchedList = Array.from(students);
 // Listenenig to click events on the pagination links
 filterDiv.addEventListener('click', (e) => {
     const targetedLink = e.target;
-    const listItems    = filterDiv.children;
+    const listItems    = filterDiv.children[0].children;
     const index        = parseInt(targetedLink.textContent);
 
     // remove "active" class from all list anchor tags
@@ -189,13 +189,13 @@ filterDiv.addEventListener('click', (e) => {
     }
 
     targetedLink.classList.add('active');
-    showPage(students, index);
+    showPage(searchedList, index);
 })
 
 // Adding search functionality
 searchBar.addEventListener('keyup', (e) => {
     const search = searchInput.value.toLowerCase();
-    const searchedList = [];
+    searchedList = [];
 
     for(let student of students){
         const studnetName =
@@ -216,13 +216,4 @@ searchBar.addEventListener('keyup', (e) => {
 
 createPagination(students.length);
 showPage(students, 1);
-
-
-
-
-
-
-
-
-
 
