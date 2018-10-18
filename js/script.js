@@ -125,6 +125,8 @@ const studentsList  = document.querySelector(".student-list");
 const students      = Array.from(studentsList.children);
 const studentsNum   = studentsList.children.length;
 let shownStudents;
+const mainDiv       = document.querySelector('.page');
+const filterDiv     = document.createElement('div');
 
 
 function pageEdit(studentsList, pageIndex){
@@ -141,7 +143,6 @@ function pageEdit(studentsList, pageIndex){
 }
 
 function showPage(studentsList, pageIndex){
-
     shownStudents = pageEdit(studentsList, pageIndex);
     students.forEach((student, index) => {
         if(shownStudents.indexOf(student) != -1){
@@ -152,7 +153,43 @@ function showPage(studentsList, pageIndex){
     })
 }
 
-showPage(students, 6);
+function createPagination(studentsNum){
+    const pageNum = Math.ceil(studentsNum / 10);
+
+    // a loop that creates each pagination link and adds it to the DOM with the first link active
+    for(let i = 0; i < pageNum; i++){
+        const link = document.createElement('li');
+        const aTag = document.createElement('a');
+        aTag.href = '#';
+        aTag.textContent = i + 1;
+        if(i === 0){
+            aTag.classList.add('active');
+        }
+        link.appendChild(aTag);
+        filterDiv.appendChild(link);
+    }
+
+    filterDiv.classList.add('pagination');
+    mainDiv.appendChild(filterDiv);
+}
+
+// Listenenig to click events on the pagination links
+filterDiv.addEventListener('click', (e) => {
+    const targetedLink = e.target;
+    const listItems    = filterDiv.children;
+    const index        = parseInt(targetedLink.textContent);
+
+    // remove "active" class from all list anchor tags
+    for(let i = 0; i < listItems.length; i++){
+        listItems[i].children[0].classList.remove('active');
+    }
+
+    targetedLink.classList.add('active');
+    showPage(students, index);
+})
+
+createPagination(students.length);
+showPage(students, 1);
 
 
 
