@@ -45,7 +45,7 @@ function paginationLinks(studentsNum){
     filterDiv.classList.add('pagination');
     mainDiv.appendChild(filterDiv);
 }
-paginationLinks(studentsNum);
+
 
 
 // Listenenig to click events on the pagination links
@@ -63,10 +63,6 @@ filterDiv.addEventListener('click', (e) => {
     targetedLink.classList.add('active');
     showLimit(students, index);
 })
-
-
-// Initializing the page with the first 10 students and the first pagination link in the active mode
-showLimit(students, 1);
 
 
 /*-----------------------------------------
@@ -116,13 +112,12 @@ searchBar.addEventListener('keyup', (e) => {
         } else {
             student.style.display = 'block';
         }
-
     }
+
 })
 
 
 
-
-
-
-
+// Initializing the page with the first 10 students and the first pagination link in the active mode
+showLimit(students, 1);
+paginationLinks(studentsNum);
