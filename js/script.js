@@ -112,8 +112,8 @@ append(pageHeader, [searchBar]);
 
 
 // Adding search functionality
-searchBar.addEventListener('keyup', (e) => {
-    // Assure the search input is lower case to let the user search in upper case letters and still get the results
+function search(){
+        // Assure the search input is lower case to let the user search in upper case letters and still get the results
     const search = searchInput.value.toLowerCase();
     searchedList = [];
 
@@ -140,8 +140,17 @@ searchBar.addEventListener('keyup', (e) => {
     // Initializing new pagination links that match the new search results
     createPagination(searchedList.length, 1);
     showPage(searchedList, 1);
+}
+
+// Listening to the keyboard keyup events
+searchBar.addEventListener('keyup', (e) => {
+    search();
 })
 
+// Listenenig to the search button click event
+searchBtn.addEventListener('click', (e) => {
+    search();
+})
 
 // Initializing the page with the first 10 students and pagination links that match number of pages
 createPagination(students.length);
