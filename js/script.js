@@ -1,4 +1,4 @@
-// Global Variables
+/*// Global Variables
 const studentsList = document.querySelector(".student-list");
 const students     = studentsList.children;
 const studentsNum  = studentsList.children.length;
@@ -98,7 +98,7 @@ append(searchBar, [searchInput, searchBtn]);
 append(pageHeader, [searchBar]);
 
 
-
+/*
 // Adding search functionality
 searchBar.addEventListener('keyup', (e) => {
     const search = searchInput.value.toLowerCase();
@@ -113,7 +113,6 @@ searchBar.addEventListener('keyup', (e) => {
             student.style.display = 'block';
         }
     }
-
 })
 
 
@@ -121,3 +120,46 @@ searchBar.addEventListener('keyup', (e) => {
 // Initializing the page with the first 10 students and the first pagination link in the active mode
 showLimit(students, 1);
 paginationLinks(studentsNum);
+*/
+const studentsList  = document.querySelector(".student-list");
+const students      = Array.from(studentsList.children);
+const studentsNum   = studentsList.children.length;
+let shownStudents;
+
+
+function pageEdit(studentsList, pageIndex){
+    firstIndex = Math.ceil((pageIndex - 1) * 10);
+    lastIndex = firstIndex + 9;
+    newList = [];
+
+    for(let i = firstIndex; i <= lastIndex; i++){
+        if(studentsList[i]){
+            newList.push(studentsList[i]);
+        }
+    }
+    return newList;
+}
+
+function showPage(studentsList, pageIndex){
+
+    shownStudents = pageEdit(studentsList, pageIndex);
+    students.forEach((student, index) => {
+        if(shownStudents.indexOf(student) != -1){
+            student.style.display = "block";
+        } else {
+            student.style.display = "none";
+        }
+    })
+}
+
+showPage(students, 6);
+
+
+
+
+
+
+
+
+
+
