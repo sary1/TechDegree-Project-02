@@ -155,9 +155,11 @@ function showPage(studentsList, pageIndex){
 
 function createPagination(studentsNum){
     const pageNum = Math.ceil(studentsNum / 10);
+    const ul   = document.createElement('ul');
 
     // a loop that creates each pagination link and adds it to the DOM with the first link active
     for(let i = 0; i < pageNum; i++){
+
         const link = document.createElement('li');
         const aTag = document.createElement('a');
         aTag.href = '#';
@@ -166,12 +168,14 @@ function createPagination(studentsNum){
             aTag.classList.add('active');
         }
         link.appendChild(aTag);
-        filterDiv.appendChild(link);
+        ul.appendChild(link);
     }
 
+    filterDiv.appendChild(ul);
     filterDiv.classList.add('pagination');
     mainDiv.appendChild(filterDiv);
 }
+
 
 // Listenenig to click events on the pagination links
 filterDiv.addEventListener('click', (e) => {
@@ -186,6 +190,28 @@ filterDiv.addEventListener('click', (e) => {
 
     targetedLink.classList.add('active');
     showPage(students, index);
+})
+
+// Adding search functionality
+searchBar.addEventListener('keyup', (e) => {
+    const search = searchInput.value.toLowerCase();
+    const searchedList = [];
+
+    for(let student of students){
+        const studnetName =
+            student.querySelector('h3').textContent.toLowerCase();
+
+        if(studnetName.indexOf(search) == -1){
+            student.style.display = 'none';
+        } else {
+            student.style.display = 'block';
+            searchedList.push(student);
+        }
+    }
+    const unOrderedList = filterDiv.querySelector('ul');
+    unOrderedList.remove();
+    createPagination(searchedList.length, 1);
+    showPage(searchedList, 1);
 })
 
 createPagination(students.length);
