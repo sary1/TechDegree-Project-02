@@ -103,6 +103,22 @@ append(pageHeader, [searchBar]);
 
 
 
+// Adding search functionality
+searchBar.addEventListener('keyup', (e) => {
+    const search = searchInput.value.toLowerCase();
+
+    for(let student of students){
+        const studnetName =
+            student.querySelector('h3').textContent.toLowerCase();
+
+        if(studnetName.indexOf(search) == -1){
+            student.style.display = 'none';
+        } else {
+            student.style.display = 'block';
+        }
+
+    }
+})
 
 
 
