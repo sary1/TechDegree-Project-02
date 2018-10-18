@@ -133,6 +133,10 @@ searchBar.addEventListener('keyup', (e) => {
     const unOrderedList = filterDiv.querySelector('ul');
     unOrderedList.remove();
 
+    if(searchedList.length === 0){
+        alert("No matching results...");
+    }
+
     // Initializing new pagination links that match the new search results
     createPagination(searchedList.length, 1);
     showPage(searchedList, 1);
