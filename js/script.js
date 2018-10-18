@@ -110,6 +110,14 @@ append(searchBar, [searchInput, searchBtn]);
 append(pageHeader, [searchBar]);
 
 
+// a function that writes to the page that there are no users with the name written in the search input
+function noResults(){
+    const message = document.createElement('h2');
+    message.textContent = "No matching results...";
+    message.classList.add('error');
+    mainDiv.appendChild(message);
+}
+
 // Adding search functionality
 function search(){
         // Assure the search input is lower case to let the user search in upper case letters and still get the results
@@ -130,10 +138,19 @@ function search(){
 
     // clearing the old pagination links
     const unOrderedList = filterDiv.querySelector('ul');
-    unOrderedList.remove();
+    if(unOrderedList){
+        unOrderedList.remove();
+    }
 
+    // if there is an error message don't write it to the page again
+    let errorMsg = document.querySelector('.error')
+    if(errorMsg){
+        mainDiv.removeChild(errorMsg);
+    }
+
+    // if search result doesn't exist write an error message
     if(searchedList.length === 0){
-        alert("No matching results...");
+        noResults();
     }
 
     // Initializing new pagination links that match the new search results

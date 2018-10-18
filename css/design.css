@@ -99,7 +99,7 @@ body{
   margin: 40px 0 0 0;
   text-align: center;
 }
- 
+
   .pagination li{
     display: inline;
   }
@@ -117,3 +117,16 @@ body{
       background-color: #4ba6c3;
       color: #fff;
     }
+
+.error{
+    float: left;
+    margin-left: 35%;
+    font-size: 16px;
+    border: 1px solid #555555;
+    border-radius: 0.5em;
+    padding: 10px;
+    background: #4BA6C3;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
