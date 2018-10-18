@@ -4,13 +4,14 @@ const studentsNum   = studentsList.children.length;
 let shownStudents;
 const mainDiv       = document.querySelector('.page');
 const filterDiv     = document.createElement('div');
+let searchedList    = Array.from(students);
 
 
 // a function that takes a list of students and page index as inputs and returns a new list of the ten students on that list
 function pageEdit(studentsList, pageIndex){
     firstIndex = Math.ceil((pageIndex - 1) * 10);
-    lastIndex = firstIndex + 9;
-    newList = [];
+    lastIndex  = firstIndex + 9;
+    newList    = [];
 
     // a loop over the main list and append the required indeces to the new initialized list
     for(let i = firstIndex; i <= lastIndex; i++){
@@ -37,7 +38,7 @@ function showPage(studentsList, pageIndex){
 // a function that takes the number of students as an input and append to the DOM the pagination links needed
 function createPagination(studentsNum){
     const pageNum = Math.ceil(studentsNum / 10);
-    const ul   = document.createElement('ul');
+    const ul      = document.createElement('ul');
 
     // a loop that creates each pagination link and adds it to the DOM with the first link active
     for(let i = 0; i < pageNum; i++){
@@ -60,8 +61,6 @@ function createPagination(studentsNum){
 
 
 // Listenenig to click events on the pagination links
-let searchedList = Array.from(students);
-
 filterDiv.addEventListener('click', (e) => {
     const targetedLink = e.target;
     const listItems    = filterDiv.children[0].children;
